@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RAA_Int_Mod02_Skills", "RAA_Int_Mod02_Skills\RAA_Int_Mod02_Skills.csproj", "{8C3E1EB4-493D-42DE-ADF9-D0AED60630FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		2023Debug|Any CPU = 2023Debug|Any CPU
+		2023Release|Any CPU = 2023Release|Any CPU
+		2024Debug|Any CPU = 2024Debug|Any CPU
+		2024Release|Any CPU = 2024Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C3E1EB4-493D-42DE-ADF9-D0AED60630FE}.2023Debug|Any CPU.ActiveCfg = 2023Debug|Any CPU
+		{8C3E1EB4-493D-42DE-ADF9-D0AED60630FE}.2023Debug|Any CPU.Build.0 = 2023Debug|Any CPU
+		{8C3E1EB4-493D-42DE-ADF9-D0AED60630FE}.2023Release|Any CPU.ActiveCfg = 2023Release|Any CPU
+		{8C3E1EB4-493D-42DE-ADF9-D0AED60630FE}.2023Release|Any CPU.Build.0 = 2023Release|Any CPU
+		{8C3E1EB4-493D-42DE-ADF9-D0AED60630FE}.2024Debug|Any CPU.ActiveCfg = 2024Debug|Any CPU
+		{8C3E1EB4-493D-42DE-ADF9-D0AED60630FE}.2024Debug|Any CPU.Build.0 = 2024Debug|Any CPU
+		{8C3E1EB4-493D-42DE-ADF9-D0AED60630FE}.2024Release|Any CPU.ActiveCfg = 2024Release|Any CPU
+		{8C3E1EB4-493D-42DE-ADF9-D0AED60630FE}.2024Release|Any CPU.Build.0 = 2024Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {55E7B9A6-1BEA-45F3-A25B-1F888DE056BD}
+	EndGlobalSection
+EndGlobal
