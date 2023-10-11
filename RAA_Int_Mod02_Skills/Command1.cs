@@ -37,8 +37,8 @@ namespace RAA_Int_Mod02_Skills
 
             // create a list of categories
             List<BuiltInCategory> catList = new List<BuiltInCategory>();
+            catList.Add(BuiltInCategory.OST_Doors);
             catList.Add(BuiltInCategory.OST_Rooms);
-            catList.Add(BuiltInCategory.OST_Windows);
 
             // create the filter
             ElementMulticategoryFilter catFilter = new ElementMulticategoryFilter(catList);
@@ -48,12 +48,25 @@ namespace RAA_Int_Mod02_Skills
                 .WhereElementIsNotElementType();
 
             // 1c. use LINQ to get the family symbol by name
-            FamilySymbol curDoorTag = new FilteredElementCollector(curDoc)
+            FamilySymbol tagDoor = new FilteredElementCollector(curDoc)
                 .OfClass(typeof(FamilySymbol))
                 .Cast<FamilySymbol>()
                 .Where(x => x.FamilyName.Equals("Door Tag"))
                 .First();
 
+            FamilySymbol tagRoom = new FilteredElementCollector(curDoc)
+                .OfClass(typeof(FamilySymbol))
+                .Cast<FamilySymbol>()
+                .Where(x => x.FamilyName.Equals("Room Tag"))
+                .First();
+
+            // 2. create dictionary for tags
+            Dictionary<string, FamilySymbol> d_Tags = new Dictionary<string, FamilySymbol>();
+
+            d_Tags.Add("Doors", tagDoor);
+            d_Tags.Add("Rooms", tagRoom);
+
+            FamilySymbol curDrTag = d_Tags["Doors"];
 
             return Result.Succeeded;
         }
