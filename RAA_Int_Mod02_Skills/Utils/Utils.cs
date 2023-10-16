@@ -20,6 +20,16 @@ namespace RAA_Int_Mod02_Skills
             return currentPanel;
         }
 
+        internal static XYZ GetMidpointBetweenTwoPoints(XYZ point0, XYZ point1)
+        {
+            XYZ midPoint = new XYZ(
+                (point0.X +  point1.X) / 2,
+                (point0.Y + point1.Y) / 2,
+                (point0.Z + point1.Z) / 2);
+
+            return midPoint;
+        }
+
         internal static RibbonPanel GetRibbonPanelByName(UIControlledApplication app, string tabName, string panelName)
         {
             foreach (RibbonPanel tmpPanel in app.GetRibbonPanels(tabName))

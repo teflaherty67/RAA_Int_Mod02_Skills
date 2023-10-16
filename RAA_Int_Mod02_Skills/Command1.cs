@@ -75,6 +75,26 @@ namespace RAA_Int_Mod02_Skills
                 LocationCurve locCurve;
                 LocationPoint locPoint;
 
+                Location curLoc = cureElem.Location;
+
+                if (curLoc == null)
+                    continue;
+
+                locPoint = curLoc as LocationPoint;
+                if (locPoint != null )
+                {
+                    // is a location point
+                    insPoint = locPoint.Point;
+                }
+                else
+                {
+                    // is a locatin curve
+                    locCurve = curLoc as LocationCurve;
+                    Curve curCurve = locCurve.Curve;
+
+                    insPoint = Utils.GetMidpointBetweenTwoPoints(curCurve.GetEndPoint(0), curCurve.GetEndPoint(1));
+                }
+
             }
 
             return Result.Succeeded;
