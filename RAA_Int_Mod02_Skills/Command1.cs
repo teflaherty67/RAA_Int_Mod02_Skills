@@ -68,6 +68,15 @@ namespace RAA_Int_Mod02_Skills
 
             FamilySymbol curDrTag = d_Tags["Doors"];
 
+            foreach (Element cureElem in collector)
+            {
+                // 3. get point from location
+                XYZ insPoint;
+                LocationCurve locCurve;
+                LocationPoint locPoint;
+
+            }
+
             return Result.Succeeded;
         }
         internal static PushButtonData GetButtonData()
