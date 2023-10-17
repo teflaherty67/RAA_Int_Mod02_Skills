@@ -51,13 +51,13 @@ namespace RAA_Int_Mod02_Skills
             FamilySymbol tagDoor = new FilteredElementCollector(curDoc)
                 .OfClass(typeof(FamilySymbol))
                 .Cast<FamilySymbol>()
-                .Where(x => x.FamilyName.Equals("Door Tag"))
+                .Where(x => x.FamilyName.Equals("M_Door Tag"))
                 .First();
 
             FamilySymbol tagRoom = new FilteredElementCollector(curDoc)
                 .OfClass(typeof(FamilySymbol))
                 .Cast<FamilySymbol>()
-                .Where(x => x.FamilyName.Equals("Room Tag"))
+                .Where(x => x.FamilyName.Equals("M_Room Tag"))
                 .First();
 
             // 2. create dictionary for tags
@@ -65,37 +65,50 @@ namespace RAA_Int_Mod02_Skills
 
             d_Tags.Add("Doors", tagDoor);
             d_Tags.Add("Rooms", tagRoom);
-
-            FamilySymbol curDrTag = d_Tags["Doors"];
-
-            foreach (Element cureElem in collector)
+            
+            using (Transaction t = new Transaction(curDoc))
             {
-                // 3. get point from location
-                XYZ insPoint;
-                LocationCurve locCurve;
-                LocationPoint locPoint;
+                t.Start("Insert tags");
 
-                Location curLoc = cureElem.Location;
-
-                if (curLoc == null)
-                    continue;
-
-                locPoint = curLoc as LocationPoint;
-                if (locPoint != null )
+                foreach (Element cureElem in collector)
                 {
-                    // is a location point
-                    insPoint = locPoint.Point;
-                }
-                else
-                {
-                    // is a locatin curve
-                    locCurve = curLoc as LocationCurve;
-                    Curve curCurve = locCurve.Curve;
+                    // 3. get point from location
+                    XYZ insPoint;
+                    LocationCurve locCurve;
+                    LocationPoint locPoint;
 
-                    insPoint = Utils.GetMidpointBetweenTwoPoints(curCurve.GetEndPoint(0), curCurve.GetEndPoint(1));
+                    Location curLoc = cureElem.Location;
+
+                    if (curLoc == null)
+                        continue;
+
+                    locPoint = curLoc as LocationPoint;
+                    if (locPoint != null)
+                    {
+                        // is a location point
+                        insPoint = locPoint.Point;
+                    }
+                    else
+                    {
+                        // is a locatin curve
+                        locCurve = curLoc as LocationCurve;
+                        Curve curCurve = locCurve.Curve;
+
+                        insPoint = Utils.GetMidpointBetweenTwoPoints(curCurve.GetEndPoint(0), curCurve.GetEndPoint(1));
+                    }
+
+                    FamilySymbol curTagType = d_Tags[cureElem.Category.Name];
+
+                    // 4. create reference to element
+                    Reference curRef = new Reference(cureElem);
+
+                    // 5a. place tag
+                    IndependentTag newTag = IndependentTag.Create(curDoc, curTagType.Id, curView.Id,
+                        curRef, false, TagOrientation.Horizontal, insPoint);
                 }
 
-            }
+                t.Commit();
+            }            
 
             return Result.Succeeded;
         }
