@@ -39,6 +39,7 @@ namespace RAA_Int_Mod02_Skills
             List<BuiltInCategory> catList = new List<BuiltInCategory>();
             catList.Add(BuiltInCategory.OST_Doors);
             catList.Add(BuiltInCategory.OST_Rooms);
+            catList.Add(BuiltInCategory.OST_Walls);
 
             // create the filter
             ElementMulticategoryFilter catFilter = new ElementMulticategoryFilter(catList);
@@ -60,11 +61,18 @@ namespace RAA_Int_Mod02_Skills
                 .Where(x => x.FamilyName.Equals("M_Room Tag"))
                 .First();
 
+            FamilySymbol tagWall = new FilteredElementCollector(curDoc)
+                .OfClass(typeof(FamilySymbol))
+                .Cast<FamilySymbol>()
+                .Where(x => x.FamilyName.Equals("M_Wall Tag"))
+                .First();
+
             // 2. create dictionary for tags
             Dictionary<string, FamilySymbol> d_Tags = new Dictionary<string, FamilySymbol>();
 
             d_Tags.Add("Doors", tagDoor);
             d_Tags.Add("Rooms", tagRoom);
+            d_Tags.Add("Walls", tagWall);
             
             using (Transaction t = new Transaction(curDoc))
             {
