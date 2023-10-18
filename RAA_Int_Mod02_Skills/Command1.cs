@@ -40,6 +40,7 @@ namespace RAA_Int_Mod02_Skills
             catList.Add(BuiltInCategory.OST_Doors);
             catList.Add(BuiltInCategory.OST_Rooms);
             catList.Add(BuiltInCategory.OST_Walls);
+            catList.Add(BuiltInCategory.OST_Areas);
 
             // create the filter
             ElementMulticategoryFilter catFilter = new ElementMulticategoryFilter(catList);
@@ -66,6 +67,7 @@ namespace RAA_Int_Mod02_Skills
                 .Cast<FamilySymbol>()
                 .Where(x => x.FamilyName.Equals("M_Wall Tag"))
                 .First();
+
 
             // 2. create dictionary for tags
             Dictionary<string, FamilySymbol> d_Tags = new Dictionary<string, FamilySymbol>();
@@ -113,6 +115,18 @@ namespace RAA_Int_Mod02_Skills
                     // 5a. place tag
                     IndependentTag newTag = IndependentTag.Create(curDoc, curTagType.Id, curView.Id,
                         curRef, false, TagOrientation.Horizontal, insPoint);
+
+                    // 5b. place area tag
+                    if (cureElem.Category.Name == "Areas")
+                    {
+                        ViewPlan curAreaPlan = curView as ViewPlan;
+                        Area curArea = cureElem as Area;
+
+                        AreaTag curAreaTag = curDoc.Create.NewAreaTag(curAreaPlan, curArea, new UV(insPoint.X, insPoint.Y));
+                        curAreaTag.TagHeadPosition = new XYZ(insPoint.X, insPoint.Y, 0);
+                        curAreaTag.HasLeader = false;
+                    }
+
                 }
 
                 t.Commit();
