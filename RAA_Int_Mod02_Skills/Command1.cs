@@ -126,7 +126,6 @@ namespace RAA_Int_Mod02_Skills
                         curAreaTag.TagHeadPosition = new XYZ(insPoint.X, insPoint.Y, 0);
                         curAreaTag.HasLeader = false;
                     }
-
                 }
 
                 t.Commit();
